@@ -10,7 +10,7 @@ jobs:
   my_job:
     runs-on: self-hosted
     container:
-      image: coverity:coverity
+      image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
       
     steps:
     - uses: actions/checkout@v2
