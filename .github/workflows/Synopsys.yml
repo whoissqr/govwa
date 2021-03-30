@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  my_job:
+  SAST:
     runs-on: self-hosted
     container:
       image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
@@ -25,6 +25,9 @@ jobs:
 
     - name: Build
       run: cov-build --dir idir go build -v ./...
+      
+    - name: Analyze
+      run: cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE --all --webapp-security --enable-audit-mode
 
     - name: Test
       run: go test -v ./...
