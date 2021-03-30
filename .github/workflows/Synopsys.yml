@@ -9,6 +9,7 @@ on:
 jobs:
   SAST:
     #runs-on: self-hosted
+    runs-on: ubuntu-18.04
     container:
       image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
       credentials:
