@@ -1,4 +1,4 @@
-name: Go
+name: sast-self-hosted
 
 on:
   push:
