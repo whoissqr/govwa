@@ -1,0 +1,33 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  SAST:
+    runs-on: self-hosted
+    container:
+      image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+          go-version: 1.15
+
+    - name: Build
+      run: cov-build --dir idir go build -v ./...
+      
+    - name: Analyze
+      run: cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE --all --webapp-security --enable-audit-mode
+
+    - name: Test
+      run: go test -v ./...
