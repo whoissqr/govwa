@@ -18,10 +18,11 @@ jobs:
       with:
         go-version: 1.15
 
-    - name: Set runner-specific environment variables
-      shell: bash
+
+    - name: Set the PATH
+      id: set_env
       run: |
-        echo "::set-env name=PATH::/opt/Coverity/cov-analysis-latest/bin"
+        echo "/opt/Coverity/cov-analysis-latest/bin" >> $GITHUB_PATH
 
     - name: Build
       run: cov-build --dir idir go build -v ./...
