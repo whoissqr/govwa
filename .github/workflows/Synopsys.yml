@@ -11,6 +11,9 @@ jobs:
     runs-on: self-hosted
     container:
       image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
       
     steps:
     - uses: actions/checkout@v2
