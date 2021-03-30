@@ -7,9 +7,9 @@ on:
     branches: [ master ]
 
 jobs:
-    build:
-      container: coverity:coverity
-      runs-on: ubuntu-latest
+  my_job:
+    container:
+      image: coverity:coverity
       steps:
       - uses: actions/checkout@v2
 
