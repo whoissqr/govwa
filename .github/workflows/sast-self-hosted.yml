@@ -40,6 +40,11 @@ jobs:
         --githubUrl https://github.com \
         --repoName whoissqr/govwa \
         --checkoutPath whoissqr/govwa "/__w/govwa/govwa/" ${{ github.sha }}
+        
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: govwaSARIF.json
       
     - name: Test
       run: go test -v ./...
