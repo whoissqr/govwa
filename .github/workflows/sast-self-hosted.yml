@@ -33,12 +33,13 @@ jobs:
       run: cov-format-errors --dir idir --json-output-v8 govwa.json
       
     - name: Export
-      run: /opt/coverity/analysis/2021.03/node/bin/node /opt/coverity/analysis/2021.03/SARIF/cov-format-sarif-for-github.js \
-      --inputFile govwa.json \
-      --outputFile govwaSARIF.json \
-      --githubUrl https://github.com \
-      --repoName whoissqr/govwa \
-      --checkoutPath 12345
+      run: |
+        /opt/coverity/analysis/2021.03/node/bin/node /opt/coverity/analysis/2021.03/SARIF/cov-format-sarif-for-github.js \
+        --inputFile govwa.json \
+        --outputFile govwaSARIF.json \
+        --githubUrl https://github.com \
+        --repoName whoissqr/govwa \
+        --checkoutPath 12345
       
     - name: Test
       run: go test -v ./...
