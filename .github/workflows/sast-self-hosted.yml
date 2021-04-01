@@ -31,7 +31,7 @@ jobs:
 
     - name: Export
       run: cov-format-errors --dir idir --json-output-v8 govwa.json; \
-            --/opt/coverity/analysis/2021.03/node/bin/node cov-format-sarif-for-github.js \
+            --/opt/coverity/analysis/2021.03/node/bin/node /opt/coverity/analysis/2021.03/SARIF/cov-format-sarif-for-github.js \
             --inputFile  govwa.json \
             --outputFile govwaSARIF.json \
             --githubUrl https://github.com \
