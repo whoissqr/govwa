@@ -39,7 +39,7 @@ jobs:
         --outputFile govwaSARIF.json \
         --githubUrl https://github.com \
         --repoName whoissqr/govwa \
-        --checkoutPath whoissqr/govwa ${{ GITHUB_WORKSPACE }} ${{ github.sha }}
+        --checkoutPath whoissqr/govwa ${{ github.workspace }} ${{ github.sha }}
       
     - name: Test
       run: go test -v ./...
