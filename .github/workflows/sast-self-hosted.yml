@@ -30,7 +30,8 @@ jobs:
       run: cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE --all --webapp-security --enable-audit-mode
 
     - name: Export
-      run: cov-format-errors --dir idir --json-output-v8 govwa.json; node cov-format-sarif-for-github.js
+      run: cov-format-errors --dir idir --json-output-v8 govwa.json; \
+            -- /opt/coverity/analysis/2021.03/node/bin/node cov-format-sarif-for-github.js \
             --inputFile  govwa.json \
             --outputFile govwaSARIF.json \
             --githubUrl https://github.com \
