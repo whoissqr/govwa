@@ -29,5 +29,12 @@ jobs:
     - name: Analyze
       run: cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE --all --webapp-security --enable-audit-mode
 
+    - name: Export
+      run: cov-format-errors --json-output-v8 govwa.json; node cov-format-sarif-for-github.js
+            --inputFile  govwa.json \
+            --outputFile govwaSARIF.json \
+            --githubUrl https://github.com \
+            --repoName whoissqr/govwa
+      
     - name: Test
       run: go test -v ./...
