@@ -8,7 +8,6 @@ on:
 
 jobs:
   SAST:
-    #runs-on: self-hosted
     runs-on: ubuntu-18.04
     container:
       image: registry.gitlab.com/whoissqr/sig-docker-reg:latest
@@ -30,5 +29,22 @@ jobs:
     - name: Analyze
       run: cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE --all --webapp-security --enable-audit-mode
 
+    - name: Report
+      run: cov-format-errors --dir idir --json-output-v8 govwa.json
+      
+    - name: Export
+      run: |
+        /opt/coverity/analysis/2021.03/node/bin/node /opt/coverity/analysis/2021.03/SARIF/cov-format-sarif-for-github.js \
+        --inputFile govwa.json \
+        --outputFile govwaSARIF.json \
+        --githubUrl https://github.com \
+        --repoName whoissqr/govwa \
+        --checkoutPath whoissqr/govwa "/__w/govwa/govwa/" ${{ github.sha }}
+        
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: govwaSARIF.json
+      
     - name: Test
       run: go test -v ./...
