@@ -3,3 +3,5 @@ GoVWA (Go Vulnerable Web Application) is a vulnerable web application designed f
 
 
 # Testing cov-format-sarif-for-github.js using Github actions
+
+# Can be deployed using both Github hosted runner and self hosted runner
